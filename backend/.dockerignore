@@ -1,8 +1,0 @@
-
-target/
-.git/
-.env
-.env.*
-!.env.example
-data/
-uploads/
