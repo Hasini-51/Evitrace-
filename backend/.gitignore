@@ -1,0 +1,7 @@
+target/
+.env
+.env.*
+!.env.example
+data/*.lock.db
+data/*.mv.db
+uploads/*

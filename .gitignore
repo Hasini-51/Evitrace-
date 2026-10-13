@@ -1,7 +1,29 @@
-frontend (1)/node_modules (1)/
-frontend (1)/dist (1)/
-backend (1)/target (1)/
+# Backend (Java/Maven)
+backend/target/
+backend/uploads/
+backend/data/
+*.class
+*.jar
+*.war
+*.ear
+
+
+# Frontend (Node/Vite)
+frontend/node_modules/
+frontend/dist/
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment files
 .env
-.env.*
-!.env.example
-backend (1)/data (1)/
+.env.local
+.env.*.local
