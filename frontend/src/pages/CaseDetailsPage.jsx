@@ -154,9 +154,11 @@ export default function CaseDetailsPage() {
                 style={{ marginTop: 6, fontSize: '0.75rem', padding: '4px 8px', borderRadius: 6, width: 'auto' }}
                 defaultValue=""
               >
-                <option value="" disabled>Change Lead...</option>
+                <option value="" disabled>Change Lead Officer...</option>
                 {users.map(u => (
-                  <option key={u.id} value={u.id}>@{u.username} ({u.role})</option>
+                  <option key={u.id} value={u.id}>
+                    {u.role === 'INVESTIGATOR' || u.role === 'ADMIN' ? `Officer ${u.username} (${u.role})` : `${u.username} (${u.role})`}
+                  </option>
                 ))}
               </select>
             )}

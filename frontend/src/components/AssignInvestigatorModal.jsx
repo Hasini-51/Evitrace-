@@ -107,11 +107,28 @@ export default function AssignInvestigatorModal({ isOpen, onClose, caseItem, onA
               style={{ width: '100%', fontSize: '0.9rem' }}
             >
               <option value="">-- Unassigned (No Lead) --</option>
-              {users.map(u => (
-                <option key={u.id} value={u.id}>
-                  @{u.username} — {u.role} ({u.email})
-                </option>
-              ))}
+              {users.filter(u => u.role === 'INVESTIGATOR' || u.role === 'ADMIN').length > 0 && (
+                <optgroup label="Investigating Officers & Authorities">
+                  {users
+                    .filter(u => u.role === 'INVESTIGATOR' || u.role === 'ADMIN')
+                    .map(u => (
+                      <option key={u.id} value={u.id}>
+                        Officer {u.username} ({u.role}) — {u.email}
+                      </option>
+                    ))}
+                </optgroup>
+              )}
+              {users.filter(u => u.role !== 'INVESTIGATOR' && u.role !== 'ADMIN').length > 0 && (
+                <optgroup label="Other Personnel">
+                  {users
+                    .filter(u => u.role !== 'INVESTIGATOR' && u.role !== 'ADMIN')
+                    .map(u => (
+                      <option key={u.id} value={u.id}>
+                        {u.username} ({u.role}) — {u.email}
+                      </option>
+                    ))}
+                </optgroup>
+              )}
             </select>
           </div>
 

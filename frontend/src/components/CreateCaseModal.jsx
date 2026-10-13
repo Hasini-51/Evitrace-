@@ -99,7 +99,7 @@ export default function CreateCaseModal({ isOpen, onClose, onCreated }) {
 
           <div>
             <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 6 }}>
-              Assign Lead Investigator
+              Assign Lead Investigator / Officer
             </label>
             <select
               value={investigatorId}
@@ -108,11 +108,28 @@ export default function CreateCaseModal({ isOpen, onClose, onCreated }) {
               style={{ width: '100%' }}
             >
               <option value="">-- Unassigned (Assign Later) --</option>
-              {users.map(u => (
-                <option key={u.id} value={u.id}>
-                  {u.username} ({u.role})
-                </option>
-              ))}
+              {users.filter(u => u.role === 'INVESTIGATOR' || u.role === 'ADMIN').length > 0 && (
+                <optgroup label="Investigating Officers & Authorities">
+                  {users
+                    .filter(u => u.role === 'INVESTIGATOR' || u.role === 'ADMIN')
+                    .map(u => (
+                      <option key={u.id} value={u.id}>
+                        Officer {u.username} ({u.role}) — {u.email}
+                      </option>
+                    ))}
+                </optgroup>
+              )}
+              {users.filter(u => u.role !== 'INVESTIGATOR' && u.role !== 'ADMIN').length > 0 && (
+                <optgroup label="Other Personnel">
+                  {users
+                    .filter(u => u.role !== 'INVESTIGATOR' && u.role !== 'ADMIN')
+                    .map(u => (
+                      <option key={u.id} value={u.id}>
+                        {u.username} ({u.role}) — {u.email}
+                      </option>
+                    ))}
+                </optgroup>
+              )}
             </select>
           </div>
 

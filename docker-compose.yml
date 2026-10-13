@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: evitrace-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - SERVER_PORT=8080
+      - JWT_SECRET=EviTrace-Default-Secret-Key-For-Dev-Only-Change-In-Production-256bit
+      - FILE_UPLOAD_DIR=/app/uploads
+      - ALLOWED_ORIGINS=http://localhost:5173,http://localhost:80,http://localhost:3000
+    volumes:
+      - evitrace-uploads:/app/uploads
+      - evitrace-data:/app/data
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: evitrace-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  evitrace-uploads:
+  evitrace-data:
