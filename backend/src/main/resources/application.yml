@@ -33,7 +33,7 @@ server:
 
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: ${JWT_SECRET:EviTrace-Default-Secret-Key-For-Dev-Only-Change-In-Production-256bit}
     expiration: ${JWT_EXPIRATION:86400000}   # 24 hours in ms
     refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000} # 7 days
 
