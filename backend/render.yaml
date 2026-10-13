@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: evitrace-backend
+    runtime: java
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/evitrace-backend-1.0.0.jar
+    envVars:
+      - key: JWT_SECRET
+        generateValue: true
+      - key: FILE_UPLOAD_DIR
+        value: /opt/render/project/uploads
+      - key: ALLOWED_ORIGINS
+        value: https://evitrace.netlify.app
+    healthCheckPath: /api/auth/health

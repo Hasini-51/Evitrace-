@@ -12,4 +12,4 @@ services:
         value: /opt/render/project/uploads
       - key: ALLOWED_ORIGINS
         value: https://evitrace.netlify.app
-    healthCheckPath: /actuator/health
+    healthCheckPath: /api/auth/health
